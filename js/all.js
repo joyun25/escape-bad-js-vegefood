@@ -1,22 +1,22 @@
-var url = 'https://hexschool.github.io/js-filter-data/data.json';
-var data;
-var table = document.querySelector('.table-content');
-var showData = [];
-var category = '';
-var filter = document.querySelector('.filter');
+const url = 'https://hexschool.github.io/js-filter-data/data.json'
+let data
+const table = document.querySelector('.table-content')
+let showData = []
+let category = ''
+const filter = document.querySelector('.filter')
 
 this.axios.get(url)
-.then(function(res){
-  data = res.data.filter(a => a.作物名稱);
-  renderData(data);
-})
+  .then(function (res) {
+    data = res.data.filter(a => a.作物名稱)
+    renderData(data)
+  })
 
-filter.addEventListener('click', filterCategory);
+filter.addEventListener('click', filterCategory)
 
-function renderData(data) {
-  var str = '';
+function renderData (data) {
+  let str = ''
   data.forEach(b => {
-    var content = `
+    const content = `
       <tr>
         <td>${b.作物名稱}</td>
         <td>${b.市場名稱}</td>
@@ -26,20 +26,18 @@ function renderData(data) {
         <td>${b.平均價}</td>
         <td>${b.交易量}</td>
       </tr>
-    `;
-    str += content;
+    `
+    str += content
   })
-  table.innerHTML = str;
+  table.innerHTML = str
 }
 
-function filterCategory(e){
-  if(e.target.nodeName == 'BUTTON'){
+function filterCategory (e) {
+  if (e.target.nodeName === 'BUTTON') {
     category = e.target.dataset.category
     showData = data.filter((i) => {
-      return i.種類代碼 == category
+      return i.種類代碼 === category
     })
-    renderData(showData);
-  }else{
-    return;
+    renderData(showData)
   }
 }
